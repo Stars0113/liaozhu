@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine
 from models.session import Base
-from routes import session, chat, ocr
+from routes import session, chat
 
 # 2. 创建数据库表（如果不存在）
 Base.metadata.create_all(bind=engine)
@@ -28,7 +28,6 @@ app.add_middleware(
 # 5. 注册路由
 app.include_router(session.router, prefix="/api")
 app.include_router(chat.router, prefix="/api")
-app.include_router(ocr.router, prefix="/api")
 
 # 6. 健康检查接口
 @app.get("/")
